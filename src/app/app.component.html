@@ -1,0 +1,116 @@
+ <div class="container text-center mt-5">
+  
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-success w-25" data-bs-toggle="modal" data-bs-target="#ktModal">
+  Alert
+</button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ktModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg mdcs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row mt-5">
+          <div class="col-md-9 border-end">
+             <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+                  <li class="nav-item bg" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Immunization Alert</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Lab Alert</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">DI Alert</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link text-success text-success" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Procedure Alert</button>
+                  </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active mt-3" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+              <div class="row">
+                  <div class="col-md-12">
+                  <h5>Immunization Alert</h5>
+                 <div class="row">
+                  <div class="col-md-1">
+                    <label for="" class="col-form-label">Find</label>
+                  </div>
+                  <div class=" col-md-4">
+                    <input type="text" id="search" class="form-control" aria-describedby="">
+                  </div>
+              </div> 
+                  </div>
+              </div>
+                  <div class="row pe-3 mt-3">
+                      <div class="col-md-12">
+                      <table class="table table-bordered">
+                          <thead>
+                              <tr class="table-success">
+                                  <th scope="col">Name</th>
+                                  <th scope="col">Descriptions</th>
+                                  <th scope="col">Web Ref.</th>
+                                  <th scope="col">Action</th>
+                                </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let user of allUser">
+                                   <td>{{user.name}}</td>
+                                  <td>{{user.description}}</td>
+                                  <td>{{user.webReference}}</td> 
+                                  <td> 
+                                      <button (click)="editUser(user)" class="btn btn-success me-2 btn-sm">Edit</button>
+                                      <button (click)="deleteUser(user)" class="btn btn-danger btn-sm">Delete</button>
+                                  </td>
+                                </tr>
+                          </tbody>
+                        </table>
+                        
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination">
+                            <li class="page-item"><a class="page-link text-success" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link text-success" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link text-success" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link text-success" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link text-success" href="#">Next</a></li>
+                          </ul>
+                        </nav>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+                  <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
+                  <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                </div>
+          </div>
+          <div class="col-md-3">
+              <form #myForm="ngForm">
+                  <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" name="name" aria-describedby="" [(ngModel)]="userObj.name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Descriptions</label>
+                    <input type="text" class="form-control" name="description" aria-describedby="" [(ngModel)]="userObj.description">
+                  </div>
+                  <div class="mb-3">
+                      <label for="webReference" class="form-label">Web Reference</label>
+                      <input type="text" class="form-control" name="webReference" aria-describedby="" [(ngModel)]="userObj.webReference">
+                    </div>
+                  <button type="button" class="btn btn-success mr-2" (click)="addUser(myForm.value)" *ngIf="!isEdit">Add</button>
+                  <button type="button" class="btn btn-primary" (click)="updateUser()" *ngIf="isEdit">Update</button>
+                </form>
+          </div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
